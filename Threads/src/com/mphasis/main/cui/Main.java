@@ -30,19 +30,33 @@ class Task implements Runnable {
     public void run() {
         Thread currThread = Thread.currentThread();
 
-        for (int i=0;i<5;i++){
+        for (int counter = 0; counter <5; counter++)
+        {
             if(currThread.getName().equals("Producer"))
             {
 
                 synchronized (data){      //attempts to acquire the lock.
-                    data.setValue(i);
-                    print(currThread.getName() + i);
+                    data.setValue(counter);
+                    print(currThread.getName() + String.valueOf(data.getValue()));
+                    try {
+                        data.notify();
+                        data.wait();                // simply writing wait(); means waiting on Task object but we have locked "Data" object
+                    } catch (InterruptedException exception) {
+                        exception.printStackTrace();
+                    }
                 }
             }
             else if(currThread.getName().equals("Consumer"))
             {
                 synchronized (data){      //attempts to acquire the lock.
                     print(currThread.getName() + String.valueOf(data.getValue()));
+                    try {
+                        data.notify();  //doesn't throws exception so can be written outside try/catch block also
+                        data.wait();
+                        //Anything written after wait() will only be executed after the thread gets out of object's wait pool
+                    } catch (InterruptedException exception) {
+                        exception.printStackTrace();
+                    }
                 }
 
             }
