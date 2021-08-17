@@ -47,6 +47,12 @@ public class Main {
 		Aggregate aggregate = (text1,text2) -> text1.concat(text2);
 		String result = aggregate.combine("Hello", " world");
 		System.out.println(result);
+
+		/*
+		Logging logger1 = (level,text) -> Logger.getLogger(Main.class.getName()).log(level,text);
+		logger1.audit(Level.INFO, "Test1);
+		Logging logger2 = Logger.getLogger(Main.class.getName())::log;
+		 */
     }
 
     public static void printing(Printer printer, String text){

@@ -3,6 +3,8 @@ package com.mphasis.main.cui;
 
 import java.util.*;
 
+import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
+
 class Process{
     public Collection<String> getElements(){                        //Polymorphic return type Collection<String>
         LinkedList<String> data = new LinkedList<String>();
@@ -94,11 +96,41 @@ public class Main {
 //                System.out.println((listIterator.previous()));
 //            }
 //        }
-        HashSet<Point> hashSet = new HashSet<Point>();
+//        HashSet<Point> hashSet = new HashSet<Point>();
+//
+//        hashSet.add(new Point(2,4));  // We need to override the hashcode and equals method.
+//        hashSet.add(new Point(2,4));
+//
+//        System.out.println(hashSet);
 
-        hashSet.add(new Point(2,4));
-        hashSet.add(new Point(2,4));
+        HashMap<String,Integer> paymentDetails = new HashMap<String,Integer>();
+        paymentDetails.put("David",10000);
+        paymentDetails.put("Mathew",15000);
+        paymentDetails.put("Allen",12000);
+        paymentDetails.put("Tom",13000);
+        paymentDetails.put("Joe",11000);
 
-        System.out.println(hashSet);
+        Integer salary = paymentDetails.get("Tom");
+        System.out.println(salary);
+
+        Set<Map.Entry<String,Integer>> allPaymentDetails =  paymentDetails.entrySet();
+        Iterator<Map.Entry<String,Integer>> iterator =  allPaymentDetails.iterator();
+
+//        while(iterator.hasNext()){
+//            Map.Entry keyValue = iterator.next();
+//            System.out.println("key: "+ keyValue.getKey()+ " , value: "+ keyValue.getValue());
+//        }
+        for(Map.Entry<String,Integer> entrySet:allPaymentDetails){
+            System.out.println(entrySet.getKey()+" >>> "+entrySet.getValue());
+        }
+
+        Set<String> keys = paymentDetails.keySet();
+        Iterator keyIterator = keys.iterator();
+
+        while(keyIterator.hasNext()){
+            String key = (String) keyIterator.next();
+            System.out.println("key: "+key+", value: " +paymentDetails.get(key));
+        }
+
     }
 }
