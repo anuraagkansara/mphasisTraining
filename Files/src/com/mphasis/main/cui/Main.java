@@ -120,7 +120,7 @@ public class Main {
 
         System.out.println();
 
-        System.out.printf("Line-up positive and negative values:\n");
+        System.out.print("Line-up positive and negative values:\n");
         System.out.printf("% ,.2f\n% ,.2f\n",
                 1234567.123, -1234567.123);
 
