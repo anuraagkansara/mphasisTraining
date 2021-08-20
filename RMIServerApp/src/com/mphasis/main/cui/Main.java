@@ -12,6 +12,7 @@ public class Main {
             AuthenticationRemoteImpl authenticationRemote = new AuthenticationRemoteImpl();
             //registering the object in RMI
             Naming.rebind("rmi:///Authentication",authenticationRemote);
+            System.out.println("Remote Object Registered");
         } catch (RemoteException | MalformedURLException e) {
             e.printStackTrace();
         }
