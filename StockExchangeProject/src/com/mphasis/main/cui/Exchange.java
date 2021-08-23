@@ -7,6 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.PriorityQueue;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Exchange implements Runnable {
 
@@ -112,6 +114,18 @@ public class Exchange implements Runnable {
 
             try
             {
+
+//                for ( ConcurrentMap.Entry<Double, PriorityQueue<Order> > priceLevel : orderbook.entrySet())
+//                {
+//
+//                            priceLevel.getValue().stream()
+//                                    .filter(individualOrder -> orderToFill.price <= individualOrder.price && individualOrder.type == OrderType.SELL )
+//                                    .forEach(individualOrder -> match(orderToFill, individualOrder));
+//
+//                            return true;
+//
+//                }
+
                 for ( ConcurrentMap.Entry<Double, PriorityQueue<Order> > priceLevel : orderbook.entrySet())
                 {
                     for (Order individualOrder : priceLevel.getValue())

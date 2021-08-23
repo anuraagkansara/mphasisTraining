@@ -17,11 +17,11 @@ public class Connection implements Runnable {
     // type 1:  execution (meaning we listen for messages from client)
     // type 2:  feed/reporting(meaning the client will be listening for us)
 
-    // we will also read from the initial client message, what the clien'ts id is
+    // we will also read from the initial client message, what the client's id is
     // then we will check to see if it's valid.
     //  if it is valid,  then the Connection object will add itself to the Exchanges dictionary
     //  (static method call)  Exchange.register(this.socket, clientID, typeOfCon)   passing this threads socket
-    // and the client ID associaated with it, and the type of conenction Exec/Reporting.
+    // and the client ID associated with it, and the type of connection Exec/Reporting.
 
     private Socket conn;
     private String clientID;
