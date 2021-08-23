@@ -11,6 +11,7 @@ public class Main {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        CallableStatement callableStatement = null;
         //Register the Driver
         try {
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -30,20 +31,28 @@ public class Main {
 //            preparedStatement.setString(4, "1234");
 //            preparedStatement.setString(5, "A");
 
-            preparedStatement = connection.prepareStatement("UPDATE USERS2 SET STATUS = ? WHERE ID=?");
-            preparedStatement.setString(1,"I");
-            preparedStatement.setInt(2,1);
+//            preparedStatement = connection.prepareStatement("UPDATE USERS2 SET STATUS = ? WHERE ID=?");
+//            preparedStatement.setString(1,"I");
+//            preparedStatement.setInt(2,1);
 
 //            resultSet = preparedStatement.executeQuery();
-            int rowsEffected = preparedStatement.executeUpdate();
-            System.out.println(rowsEffected);
+//            int rowsEffected = preparedStatement.executeUpdate();
+//            System.out.println(rowsEffected);
 
-            connection.commit();// optional, auto-commits happen on program termination.
+//            connection.commit();// optional, auto-commits happen on program termination.
 
 //            while(resultSet.next()){
 //                System.out.println(resultSet.getString(1) + " "+ resultSet.getString(2));
 //            }
+            callableStatement = connection.prepareCall("{call INSERT_USER_PROC(?,?,?,?,?)}");
 
+            callableStatement.setInt(1,1);
+            callableStatement.setString(2,"RAVI");
+            callableStatement.setString(3,"KUMAR");
+            callableStatement.setString(4,"PASS");
+            callableStatement.setString(5,"I");
+
+            System.out.println(callableStatement.execute());
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
