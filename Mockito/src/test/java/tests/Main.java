@@ -23,11 +23,11 @@ public class Main {
 
     @InjectMocks
     Portfolio portfolio;
-    Math maths;
 
 
     @Mock
     StockService stockService;
+    @Mock
     CalculatorService calculatorService;
 
 
@@ -62,12 +62,14 @@ public class Main {
 //        return marketValue == 10500.0;
         assertEquals(10500.0, marketValue, 1);
 
+
+    }
+
+    @Test
+    public void checkAdd() {
         when(calculatorService.add(1.0, 2.0)).thenReturn(3.0);
-        double addResult = maths.add(1.0, 2.0);
-
+        double addResult = portfolio.checkAdd(1.0, 2.0);
         assertEquals(3.0, addResult, 1);
-
-
     }
 
     @Test
@@ -81,4 +83,5 @@ public class Main {
         Assert.assertEquals(maths.add(10.0, 20.0), 30.0, 0);
     }
 }
+
 
