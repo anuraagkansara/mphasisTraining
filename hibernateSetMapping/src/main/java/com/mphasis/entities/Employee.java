@@ -62,4 +62,15 @@ public class Employee {
     public void setCertificates( Set certificates ) {
         this.certificates = certificates;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", salary=" + salary +
+                ", certificates=" + certificates +
+                '}';
+    }
 }

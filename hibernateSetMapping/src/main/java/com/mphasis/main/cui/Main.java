@@ -75,7 +75,7 @@ public class Main {
             String hql = "FROM Employee";
             Query query = session.createQuery(hql);
             List results = query.list();
-            System.out.println(results.toString());
+            results.forEach(System.out::println);
 
             tx.commit();
         } catch (HibernateException e) {

@@ -44,4 +44,11 @@ public class Certificates {
             return tmp;
         }
 
+    @Override
+    public String toString() {
+        return "Certificates{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
