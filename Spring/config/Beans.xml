@@ -1,0 +1,68 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd "
+    default-init-method="init" default-destroy-method="destroy">
+
+    <bean id="email" class="com.mphasis.main.EmailService" scope = "prototype" init-method="initTwitterService" destroy-method="destroyingTwitterService">
+<!--        prototype means created on demand-->
+        <property name="port" value="4567"/>
+    </bean>
+
+    <bean id="twitter" class="com.mphasis.main.Twitter" lazy-init="true" init-method="initTwitterService" destroy-method="destroyingTwitterService">
+<!--        singleton but lazy initialization-->
+    </bean>
+
+    <bean id="textEditor" class = "com.mphasis.main.TextEditor" autowire="constructor">
+<!--        <property name="spellChecker" ref="spellChecker"/>-->
+<!--        <constructor-arg ref ="spellChecker"/>-->
+    </bean>
+    <bean id="spellChecker" name="spellChecker" class="com.mphasis.main.SpellChecker"/>
+
+    <bean id = "javaCollection" class = "com.mphasis.main.JavaCollection">
+
+        <!-- results in a setAddressList(java.util.List) call -->
+        <property name = "addressList">
+            <list>
+                <value>INDIA</value>
+                <value>Pakistan</value>
+                <value>USA</value>
+                <value>USA</value>
+            </list>
+        </property>
+
+        <!-- results in a setAddressSet(java.util.Set) call -->
+        <property name = "addressSet">
+            <set>
+                <value>INDIA</value>
+                <value>Pakistan</value>
+                <value>USA</value>
+                <value>USA</value>
+            </set>
+        </property>
+
+        <!-- results in a setAddressMap(java.util.Map) call -->
+        <property name = "addressMap">
+            <map>
+                <entry key = "1" value = "INDIA"/>
+                <entry key = "2" value = "Pakistan"/>
+                <entry key = "3" value = "USA"/>
+                <entry key = "4" value = "USA"/>
+            </map>
+        </property>
+
+        <!-- results in a setAddressProp(java.util.Properties) call -->
+        <property name = "addressProp">
+            <props>
+                <prop key = "one">INDIA</prop>
+                <prop key = "one">INDIA</prop>
+                <prop key = "two">Pakistan</prop>
+                <prop key = "three">USA</prop>
+                <prop key = "four">USA</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
