@@ -6,25 +6,17 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Set;
 
-@Entity
-@Table(name = "EMPLOYEE")
 public class Employee {
-    @Id @GeneratedValue
-
-    @Column(name = "id")
     private int id;
-
-    @Column(name = "first_name")
     private String firstName;
-
-    @Column(name = "last_name")
     private String lastName;
-
-    @Column(name = "salary")
     private int salary;
+    private Set certificates;
 
     public Employee() {}
+
     public Employee(String fname, String lname, int salary) {
         this.firstName = fname;
         this.lastName = lname;
@@ -61,5 +53,13 @@ public class Employee {
 
     public void setSalary( int salary ) {
         this.salary = salary;
+    }
+
+    public Set getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates( Set certificates ) {
+        this.certificates = certificates;
     }
 }

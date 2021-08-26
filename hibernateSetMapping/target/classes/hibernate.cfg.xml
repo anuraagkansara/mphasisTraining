@@ -43,8 +43,11 @@
 <!--        </property>-->
 
         <!-- List of ORM XML mapping files -->
-        <mapping class = "com.mphasis.entities.Employee"/>
-<!--        <mapping resource = "Employee.hbm.xml"/>-->
+<!--        <mapping class = "com.mphasis.entities.Employee"/>-->
+        <mapping resource = "Employee.hbm.xml"/>
+
+
+
     </session-factory>
 </hibernate-configuration>
 
