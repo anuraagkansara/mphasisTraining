@@ -2,11 +2,30 @@
 
 <beans xmlns = "http://www.springframework.org/schema/beans"
        xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context = "http://www.springframework.org/schema/context"
+       xmlns:aop = "http://www.springframework.org/schema/aop"
        xsi:schemaLocation = "http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd "
-    default-init-method="init" default-destroy-method="destroy">
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://springframework.org/schema/aop/spring-aop-3.0.xsd"
+       default-init-method="init" default-destroy-method="destroy">
 
-    <bean id="email" class="com.mphasis.main.EmailService" scope = "prototype" init-method="initTwitterService" destroy-method="destroyingTwitterService">
+    <context:annotation-config/>
+
+    <aop:config>
+        <aop:aspect id="perfMon" ref="auditService">
+            <aop:pointcut id="sendEmail" expression="execution(* com.mphasis.main.*.sendMessage(..))"/>
+                <aop:before pointcut-ref="sendEmail" method="beforeAdvice"/>
+                <aop:after pointcut-ref="sendEmail" method="afterAdvice"/>
+                <aop:after-returning pointcut-ref="sendEmail"  returning="returnValue" method="afterReturnAdvice"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="auditService" class="com.mphasis.utils.Audit"/>
+
+    <bean id="email" class="com.mphasis.main.EmailService" scope = "prototype" init-method="initEmailService" destroy-method="destroyingEmailService">
 <!--        prototype means created on demand-->
         <property name="port" value="4567"/>
     </bean>
@@ -15,11 +34,11 @@
 <!--        singleton but lazy initialization-->
     </bean>
 
-    <bean id="textEditor" class = "com.mphasis.main.TextEditor" autowire="constructor">
+    <bean id="textEditor" class = "com.mphasis.main.TextEditor">
 <!--        <property name="spellChecker" ref="spellChecker"/>-->
 <!--        <constructor-arg ref ="spellChecker"/>-->
     </bean>
-    <bean id="spellChecker" name="spellChecker" class="com.mphasis.main.SpellChecker"/>
+    <bean id="spellChecker" name="spellingCheck" class="com.mphasis.main.SpellChecker"/>
 
     <bean id = "javaCollection" class = "com.mphasis.main.JavaCollection">
 
@@ -64,5 +83,7 @@
             </props>
         </property>
     </bean>
+
+
 
 </beans>
