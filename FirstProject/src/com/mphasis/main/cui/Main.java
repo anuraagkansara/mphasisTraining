@@ -8,9 +8,11 @@ public class Main {
         int b;
         int c;
         int d;
+        int e = 123;
         b=3;
         a=1;
         b=2;
+
         System.out.println("end");
     }
 }
